@@ -315,22 +315,20 @@
                 </section>
 
             </main>
-            
-            <div class="w-full flex justify-end p-4">
-                <div class="text-sm text-gray-500">
-                    <a id="downloadPdfBtn" class="download-link no-export mr-4 hover:underline cursor-pointer">Download PDF</a>
-                    <a id="downloadDocBtn" class="download-link no-export hover:underline cursor-pointer">Download DOC</a>
-                </div>
-            </div>
         </div> <!-- end #cvCard -->
-        
+
+        <!-- Download buttons positioned at the bottom-right of the page -->
+        <div class="fixed bottom-4 right-4 flex space-x-4">
+            <a id="downloadPdfBtn" class="download-link no-export px-4 py-2 bg-secondary text-white rounded-md hover:opacity-90 cursor-pointer">Download PDF</a>
+            <a id="downloadDocBtn" class="download-link no-export px-4 py-2 bg-primary text-white rounded-md hover:opacity-90 cursor-pointer">Download DOC</a>
+        </div>
+
         <!-- Footer outside the main CV card -->
-         <footer class="p-4 text-center text-xs text-gray-500 mt-4">
-             &copy; 2025 OMAR ALARNAOUT.
-         </footer>
-     </div>
-+</div>
-+
-+<script src="js/download.js"></script>
- </body>
+        <footer class="p-4 text-center text-xs text-gray-500 mt-4">
+            &copy; 2025 OMAR ALARNAOUT.
+        </footer>
+    </div>
+
+    <script src="js/download.js"></script>
+</body>
 </html>

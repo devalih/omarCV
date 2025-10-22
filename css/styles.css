@@ -12,3 +12,21 @@
 .download-btn:hover {
   background-color: #0056b3;
 }
+
+/* Style for the fixed download buttons */
+.fixed {
+    position: fixed;
+    z-index: 50;
+}
+
+.bottom-4 {
+    bottom: 1rem;
+}
+
+.right-4 {
+    right: 1rem;
+}
+
+.space-x-4 > :not(:last-child) {
+    margin-right: 1rem;
+}
