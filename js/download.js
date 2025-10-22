@@ -4,39 +4,52 @@ document.addEventListener('DOMContentLoaded', () => {
   const docBtn = document.getElementById('downloadDocBtn');
   if (!cv) return;
 
+  // download links that should not appear in exported files
   const downloadLinks = cv.querySelectorAll('.download-link');
 
   function hideLinks() { downloadLinks.forEach(el => el.style.display = 'none'); }
   function showLinks() { downloadLinks.forEach(el => el.style.display = 'inline'); }
 
+  // Utility to apply compact styling during export
+  function applyShrink() { cv.classList.add('pdf-shrink'); }
+  function removeShrink() { cv.classList.remove('pdf-shrink'); }
+
+  // PDF export
   if (pdfBtn) {
     pdfBtn.addEventListener('click', () => {
+      if (typeof html2pdf === 'undefined') {
+        console.error('html2pdf not loaded');
+        return;
+      }
       hideLinks();
-      cv.classList.add('pdf-shrink');
+      applyShrink();
 
       const opt = {
-        margin:       6, // mm
+        margin:       10, // mm
         filename:     'Omar-CV.pdf',
         image:        { type: 'jpeg', quality: 0.98 },
         html2canvas:  { scale: 2, useCORS: true },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      // generate and restore UI after finish
+      // generate PDF and restore UI afterwards
       html2pdf().set(opt).from(cv).save().then(() => {
-        cv.classList.remove('pdf-shrink');
+        removeShrink();
         showLinks();
-      }).catch(() => {
-        cv.classList.remove('pdf-shrink');
+      }).catch(err => {
+        console.error(err);
+        removeShrink();
         showLinks();
       });
     });
   }
 
+  // DOC export (HTML wrapped for Word)
   if (docBtn) {
     docBtn.addEventListener('click', () => {
       hideLinks();
-      // clone CV, strip download links and inject compact styles for Word
+
+      // Clone the CV and remove download controls
       const clone = cv.cloneNode(true);
       clone.querySelectorAll('.download-link').forEach(n => n.remove());
 
@@ -65,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
       a.remove();
       URL.revokeObjectURL(url);
 
-      // restore
       showLinks();
     });
   }
