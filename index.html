@@ -60,6 +60,18 @@
         .experience-item > div {
             margin-left: 1rem;
         }
+        /* Styles applied only during export to shrink content and save pages */
+        .pdf-shrink {
+            font-size: 12px !important;
+            line-height: 1.15 !important;
+        }
+        .pdf-shrink h1 { font-size: 20px !important; }
+        .pdf-shrink h2, .pdf-shrink .section-title { font-size: 13px !important; padding-bottom: 0.25rem !important; margin-bottom: 0.5rem !important; }
+        .pdf-shrink .sidebar-title { font-size: 12px !important; }
+        .pdf-shrink .w-32 { width: 64px !important; height: 64px !important; } /* shrink profile image */
+        .pdf-shrink img { max-width: 100% !important; height: auto !important; }
+        /* keep the small links visible only on screen; they will be hidden during export by JS, but ensure print rules won't show them */
+        .no-export { display: inline; }
     </style>
 </head>
 <body>
@@ -186,11 +198,6 @@
                 
                 <!-- MAIN NAME HEADER -->
                 <h1 class="text-5xl font-extrabold tracking-tight text-primary mb-6 border-b-4 border-secondary pb-2">OMAR ALARNAOUT</h1>
-                <!-- Download buttons -->
-                <div class="mt-4 flex gap-3">
-                    <button id="downloadPdfBtn" class="px-4 py-2 bg-secondary text-white rounded-md hover:opacity-90">Download PDF</button>
-                    <button id="downloadDocBtn" class="px-4 py-2 bg-primary text-white rounded-md hover:opacity-90">Download DOC</button>
-                </div>
                 
                 <!-- PROFESSIONAL SUMMARY -->
                 <section class="mb-8">
@@ -311,11 +318,21 @@
             
         </div>
         
+        <!-- small link-style download controls INSIDE the CV card, bottom-right -->
+        <div class="max-w-7xl mx-auto mt-2 lg:flex hidden lg:block">
+            <div class="w-full flex justify-end pr-2">
+                <div class="text-sm text-gray-500">
+                    <a id="downloadPdfBtn" class="download-link no-export mr-4 hover:underline cursor-pointer">Download PDF</a>
+                    <a id="downloadDocBtn" class="download-link no-export hover:underline cursor-pointer">Download DOC</a>
+                </div>
+            </div>
+        </div>
+
         <!-- Footer outside the main CV card -->
         <footer class="p-4 text-center text-xs text-gray-500 mt-4">
             &copy; 2025 OMAR ALARNAOUT.
         </footer>
-    </div>
+    </div
     
     <script src="js/download.js"></script>
 </body>
